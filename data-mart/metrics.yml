@@ -1,0 +1,38 @@
+# 지표 정의 예시: AI, 대시보드, 사람이 모두 이 정의를 참조해요.
+metrics:
+  - name: achievement_rate
+    label: 달성률
+    description: 목표 매출 대비 실적 매출의 비율
+    formula: sum(actual_revenue) / sum(target_revenue)
+    source: mart_target_actual
+    unit: percent
+    notes: 담당자별 달성률을 평균 내지 않고, 합산한 뒤 나눈다.
+
+  - name: revenue_gap
+    label: 목표 대비 갭
+    description: 실적 매출에서 목표 매출을 뺀 값
+    formula: sum(actual_revenue) - sum(target_revenue)
+    source: mart_target_actual
+    unit: KRW
+
+  - name: revenue_per_activity
+    label: 활동당 매출
+    description: 영업 활동 1건당 실적 매출 (생산성 지표)
+    formula: sum(actual_revenue) / sum(activities)
+    source: mart_target_actual
+    unit: KRW
+
+  - name: forecast_gap
+    label: 전망 갭
+    description: 전망 매출에서 목표 매출을 뺀 값
+    formula: sum(forecast_revenue) - sum(target_revenue)
+    source: mart_forecast
+    unit: KRW
+
+  - name: stage_conversion_rate
+    label: 단계 전환율
+    description: 특정 단계에 도달한 딜 중 다음 단계에 도달한 딜의 비율
+    formula: count(reached_next_stage) / count(reached_stage)
+    source: mart_funnel
+    unit: percent
+    notes: 표본이 10건 미만이면 참고용으로 표시한다.
